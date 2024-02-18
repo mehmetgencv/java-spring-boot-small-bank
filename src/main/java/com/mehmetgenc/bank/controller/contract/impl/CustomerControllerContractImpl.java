@@ -3,6 +3,8 @@ package com.mehmetgenc.bank.controller.contract.impl;
 import com.mehmetgenc.bank.controller.contract.CustomerControllerContract;
 import com.mehmetgenc.bank.dto.CustomerDto;
 import com.mehmetgenc.bank.entity.Customer;
+import com.mehmetgenc.bank.errormessage.CustomerErrorMessage;
+import com.mehmetgenc.bank.general.N11BusinessException;
 import com.mehmetgenc.bank.mapper.CustomerMapper;
 import com.mehmetgenc.bank.request.CustomerSaveRequest;
 import com.mehmetgenc.bank.request.CustomerUpdatePasswordRequest;
@@ -68,6 +70,13 @@ public class CustomerControllerContractImpl implements CustomerControllerContrac
     @Override
     public CustomerDto updateCustomerPassword(Long id, CustomerUpdatePasswordRequest request) {
         Customer customer = customerEntityService.findByIdWithControl(id);
+
+        if(!customer.getPassword().equals(request.oldPass())){
+            throw new N11BusinessException(CustomerErrorMessage.INVALID_OLD_PASSWORD);
+        }
+        if(!request.newPass().equals(request.newPass2())){
+            throw new N11BusinessException(CustomerErrorMessage.NEW_PASSWORDS_DID_NOT_MATCH);
+        }
         customer.setPassword(request.newPass());
         customer = customerEntityService.save(customer);
 
