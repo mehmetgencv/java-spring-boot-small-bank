@@ -1,7 +1,12 @@
 package com.mehmetgenc.bank.general;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.LocalDateTime;
 
+@Getter
+@Setter
 public class RestResponse <T>{
     private T data;
     private LocalDateTime responseDate;

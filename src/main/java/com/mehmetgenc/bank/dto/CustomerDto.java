@@ -1,6 +1,6 @@
 package com.mehmetgenc.bank.dto;
 
-import com.mehmetgenc.bank.enums.EnumState;
+import com.mehmetgenc.bank.enums.EnumStatus;
 
 import java.time.LocalDate;
 
@@ -12,6 +12,6 @@ public record CustomerDto(Long id,
                           String identityNo,
                           String phoneNumber,
                           String email,
-                          EnumState state) {
+                          EnumStatus status) {
 
 }

@@ -1,6 +1,6 @@
 package com.mehmetgenc.bank.entity;
 
-import com.mehmetgenc.bank.enums.EnumState;
+import com.mehmetgenc.bank.enums.EnumStatus;
 import com.mehmetgenc.bank.general.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -48,6 +48,6 @@ public class Customer extends BaseEntity {
     private String email;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "STATE", length = 30, nullable = false)
-    private EnumState state;
+    @Column(name = "STATUS", length = 30, nullable = false)
+    private EnumStatus status;
 }

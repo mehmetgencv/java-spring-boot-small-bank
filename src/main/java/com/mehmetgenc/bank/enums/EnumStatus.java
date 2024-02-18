@@ -1,6 +1,6 @@
 package com.mehmetgenc.bank.enums;
 
-public enum EnumState {
+public enum EnumStatus {
     PASSIVE,
     ACTIVE
 }
