@@ -5,6 +5,7 @@ import com.mehmetgenc.bank.dto.CustomerDto;
 import com.mehmetgenc.bank.entity.Customer;
 import com.mehmetgenc.bank.mapper.CustomerMapper;
 import com.mehmetgenc.bank.request.CustomerSaveRequest;
+import com.mehmetgenc.bank.request.CustomerUpdatePasswordRequest;
 import com.mehmetgenc.bank.request.CustomerUpdateRequest;
 import com.mehmetgenc.bank.service.entityservice.CustomerEntityService;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +21,7 @@ public class CustomerControllerContractImpl implements CustomerControllerContrac
     @Override
     public CustomerDto updateCustomer(CustomerUpdateRequest request) {
 
-        Customer customer = customerEntityService.findById(request.id());
+        Customer customer = customerEntityService.findByIdWithControl(request.id());
         CustomerMapper.INSTANCE.updateCustomerFields(customer, request);
         customerEntityService.save(customer);
         CustomerDto customerDto = CustomerMapper.INSTANCE.convertToCustomerDto(customer);
@@ -38,9 +39,38 @@ public class CustomerControllerContractImpl implements CustomerControllerContrac
     }
 
     @Override
-    public List<CustomerDto> getAll() {
+    public List<CustomerDto> getAllCustomers() {
         List<Customer> customers = customerEntityService.findAll();
         List<CustomerDto> customerDtos = CustomerMapper.INSTANCE.convertToCustomerDtos(customers);
         return customerDtos;
+    }
+
+    @Override
+    public CustomerDto getCustomerById(Long id) {
+        Customer customer = customerEntityService.findByIdWithControl(id);
+        CustomerDto customerDto = CustomerMapper.INSTANCE.convertToCustomerDto(customer);
+
+        return customerDto;
+    }
+
+    @Override
+    public CustomerDto getCustomerByUsername(String username) {
+        Customer customer = customerEntityService.findCustomerByUsername(username);
+        CustomerDto customerDto = CustomerMapper.INSTANCE.convertToCustomerDto(customer);
+        return customerDto;
+    }
+
+    @Override
+    public void deleteCustomer(Long id) {
+        customerEntityService.deleteCustomer(id);
+    }
+
+    @Override
+    public CustomerDto updateCustomerPassword(Long id, CustomerUpdatePasswordRequest request) {
+        Customer customer = customerEntityService.findByIdWithControl(id);
+        customer.setPassword(request.newPass());
+        customer = customerEntityService.save(customer);
+
+        return CustomerMapper.INSTANCE.convertToCustomerDto(customer);
     }
 }

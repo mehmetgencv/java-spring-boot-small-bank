@@ -35,8 +35,16 @@ public class CustomerEntityService {
         return customerRepository.findAll();
     }
 
-    public Customer findById(Long id) {
+    public Customer findByIdWithControl(Long id) {
         Optional<Customer> optionalCustomer = customerRepository.findById(id);
         return optionalCustomer.get();
+    }
+
+    public Customer findCustomerByUsername(String username) {
+        return customerRepository.findCustomerByUsername(username);
+    }
+
+    public void deleteCustomer(Long id) {
+        customerRepository.deleteById(id);
     }
 }
