@@ -2,7 +2,9 @@ package com.mehmetgenc.bank.service.entityservice;
 
 import com.mehmetgenc.bank.dao.CustomerRepository;
 import com.mehmetgenc.bank.entity.Customer;
+import com.mehmetgenc.bank.exceptions.ItemNotFoundException;
 import com.mehmetgenc.bank.general.BaseAdditionalFields;
+import com.mehmetgenc.bank.general.GeneralErrorMessage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -37,7 +39,13 @@ public class CustomerEntityService {
 
     public Customer findByIdWithControl(Long id) {
         Optional<Customer> optionalCustomer = customerRepository.findById(id);
-        return optionalCustomer.get();
+        Customer customer;
+        if(optionalCustomer.isPresent()){
+            customer = optionalCustomer.get();
+        }else {
+            throw new ItemNotFoundException(GeneralErrorMessage.ITEM_NOT_FOUND);
+        }
+        return customer;
     }
 
     public Customer findCustomerByUsername(String username) {
