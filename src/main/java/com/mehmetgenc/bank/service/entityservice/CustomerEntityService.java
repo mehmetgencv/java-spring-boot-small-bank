@@ -49,7 +49,15 @@ public class CustomerEntityService {
     }
 
     public Customer findCustomerByUsername(String username) {
-        return customerRepository.findCustomerByUsername(username);
+        Optional<Customer> optionalCustomer = Optional.ofNullable(customerRepository.findCustomerByUsername(username));
+
+        Customer customer;
+        if(optionalCustomer.isPresent()){
+            customer = optionalCustomer.get();
+        }else {
+            throw new ItemNotFoundException(GeneralErrorMessage.ITEM_NOT_FOUND);
+        }
+        return customer;
     }
 
     public void deleteCustomer(Long id) {
