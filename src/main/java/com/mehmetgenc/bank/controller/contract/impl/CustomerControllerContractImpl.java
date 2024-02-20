@@ -64,7 +64,7 @@ public class CustomerControllerContractImpl implements CustomerControllerContrac
 
     @Override
     public void deleteCustomer(Long id) {
-        customerEntityService.deleteCustomer(id);
+        customerEntityService.delete(id);
     }
 
     @Override
