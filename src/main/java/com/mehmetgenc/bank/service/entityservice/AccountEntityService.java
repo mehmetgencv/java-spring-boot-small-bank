@@ -1,6 +1,8 @@
 package com.mehmetgenc.bank.service.entityservice;
 
+import com.mehmetgenc.bank.dao.AccountRepository;
 import com.mehmetgenc.bank.entity.Account;
+import com.mehmetgenc.bank.general.BaseEntityService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,9 +13,9 @@ import java.util.List;
  * @author: mehmetgenc
  */
 @Service
-public class AccountEntityService {
-    private final
-    public List<Account> getAllAccounts() {
+public class AccountEntityService extends BaseEntityService<Account, AccountRepository> {
 
+    protected AccountEntityService(AccountRepository repository) {
+        super(repository);
     }
 }

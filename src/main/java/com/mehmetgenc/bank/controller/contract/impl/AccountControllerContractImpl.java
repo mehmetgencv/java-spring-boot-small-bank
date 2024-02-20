@@ -22,7 +22,7 @@ public class AccountControllerContractImpl implements AccountControllerContract 
     private final AccountEntityService accountEntityService;
     @Override
     public List<AccountDto> getAllAccounts() {
-        List<Account> accounts = accountEntityService.getAllAccounts();
+        List<Account> accounts = accountEntityService.findAll();
 
         return AccountMapper.INSTANCE.convertToAccountDTOs(accounts);
     }
