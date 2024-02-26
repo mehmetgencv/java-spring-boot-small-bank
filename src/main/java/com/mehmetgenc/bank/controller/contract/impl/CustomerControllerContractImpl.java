@@ -78,7 +78,7 @@ public class CustomerControllerContractImpl implements CustomerControllerContrac
             throw new N11BusinessException(CustomerErrorMessage.NEW_PASSWORDS_DID_NOT_MATCH);
         }
         customer.setPassword(request.newPass());
-        customer = customerEntityService.save(customer);
+        customerEntityService.save(customer);
 
         return CustomerMapper.INSTANCE.convertToCustomerDto(customer);
     }

@@ -19,6 +19,9 @@ public class RestResponse <T>{
         this.isSuccess = isSuccess;
     }
 
+    public RestResponse() {
+    }
+
     public static <T>RestResponse<T> of(T data){
         return new RestResponse<>(data, true);
 
