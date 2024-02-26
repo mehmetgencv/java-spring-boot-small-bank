@@ -111,6 +111,8 @@ public class TransactionalController {
 
   /**
    * 8: aynı class içinde requires new kullanımı.
+   * Propagation.REQUIRES_NEW
+   * burada normalde yenı bir transaction acmasını ve eskısını askıya almasını beklerız ama olmaz cunku sprıng boot proxy based calısıyor
    */
   @PostMapping("/ts8")
   public void ts8() {
@@ -119,6 +121,7 @@ public class TransactionalController {
 
   /**
    * 9: requires new i farklı classa taşıma.
+   * burada baska bıe bean yanı servise gittigı ıcın mevcut transactıonu askıya alır ve yenısını calıstırır
    */
   @PostMapping("/ts9")
   public void ts9() {
